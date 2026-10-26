@@ -1,0 +1,29 @@
+services:
+  jaeger:
+    image: jaegertracing/jaeger:2.22.0
+    command: ["--config", "/etc/jaeger/config.yaml"]
+    volumes:
+      - ./infra/jaeger.yaml:/etc/jaeger/config.yaml:ro
+    ports:
+      - "127.0.0.1:16686:16686"
+      - "127.0.0.1:4318:4318"
+      - "127.0.0.1:4317:4317"
+    restart: unless-stopped
+  grafana:
+    image: grafana/grafana:12.3.0
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    volumes:
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "127.0.0.1:3001:3000"
+    depends_on:
+      - jaeger
+    restart: unless-stopped
+volumes:
+  grafana-data:

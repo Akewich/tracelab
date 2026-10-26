@@ -1,0 +1,22 @@
+{
+  "name": "@tracelab/backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.ts",
+    "start": "node src/index.ts",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "1.9.0",
+    "@opentelemetry/core": "2.6.1",
+    "@opentelemetry/exporter-trace-otlp-http": "0.214.0",
+    "@opentelemetry/resources": "2.6.1",
+    "@opentelemetry/sdk-node": "0.214.0",
+    "@opentelemetry/sdk-trace-base": "2.6.1",
+    "@tracelab/shared": "workspace:*",
+    "zod": "4.6.7"
+  }
+}

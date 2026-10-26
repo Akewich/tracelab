@@ -1,0 +1,9 @@
+packages:
+  - backend
+  - packages/*
+allowBuilds:
+  esbuild: true
+  protobufjs: true
+  sharp: false
+  unrs-resolver: false
+strictDepBuilds: true
